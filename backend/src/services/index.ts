@@ -7,3 +7,5 @@
  */
 
 export * from './initExample';
+export * from './car';
+export * from './contact';

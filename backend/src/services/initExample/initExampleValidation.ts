@@ -27,7 +27,7 @@ export const metadataSchema = z.object({
 /**
  * Schema for create request validation
  */
-export const createSchema = z.object({
+export const initExampleCreateSchema = z.object({
   name: z
     .string()
     .min(INIT_EXAMPLE_LIMITS.NAME_MIN_LENGTH)
@@ -39,7 +39,7 @@ export const createSchema = z.object({
 /**
  * Schema for update request validation
  */
-export const updateSchema = z.object({
+export const initExampleUpdateSchema = z.object({
   name: z
     .string()
     .min(INIT_EXAMPLE_LIMITS.NAME_MIN_LENGTH)
@@ -52,7 +52,7 @@ export const updateSchema = z.object({
 /**
  * Schema for ID parameter validation
  */
-export const paramsSchema = z.object({
+export const initExampleParamsSchema = z.object({
   id: z.coerce.number().int().positive(),
 });
 
@@ -60,6 +60,6 @@ export const paramsSchema = z.object({
  * Inferred types from schemas
  */
 export type MetadataInput = z.infer<typeof metadataSchema>;
-export type CreateInput = z.infer<typeof createSchema>;
-export type UpdateInput = z.infer<typeof updateSchema>;
-export type ParamsInput = z.infer<typeof paramsSchema>;
+export type InitExampleCreateInput = z.infer<typeof initExampleCreateSchema>;
+export type InitExampleUpdateInput = z.infer<typeof initExampleUpdateSchema>;
+export type InitExampleParamsInput = z.infer<typeof initExampleParamsSchema>;

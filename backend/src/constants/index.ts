@@ -18,3 +18,13 @@ export {
   type InitExampleLimitsType,
   type InitExamplePriority,
 } from './initExample';
+
+/**
+ * Car constants
+ */
+export * from './car';
+
+/**
+ * Contact constants
+ */
+export * from './contact';

@@ -15,7 +15,11 @@ import {
   InitExampleListResponse,
   InitExampleMetadata,
 } from './initExampleTypes';
-import { createSchema, updateSchema, paramsSchema } from './initExampleValidation';
+import {
+  initExampleCreateSchema,
+  initExampleUpdateSchema,
+  initExampleParamsSchema,
+} from './initExampleValidation';
 
 /**
  * Creates default metadata using constants
@@ -68,7 +72,7 @@ export async function initExampleList(): Promise<InitExampleListResponse[]> {
  * // Returns: { id: 1, name: 'Test', description: 'A test entity', active: true, ... }
  */
 export async function initExampleCreate(body: unknown): Promise<InitExampleEntity> {
-  const validation = createSchema.safeParse(body);
+  const validation = initExampleCreateSchema.safeParse(body);
 
   if (!validation.success) {
     throw new ServiceError('VALIDATION_ERROR', 'Validation failed', 400, validation.error.errors);
@@ -110,7 +114,7 @@ export async function initExampleCreate(body: unknown): Promise<InitExampleEntit
  * // Returns: { id: 1, name: 'Example', ... }
  */
 export async function initExampleGet(params: unknown): Promise<InitExampleEntity> {
-  const validation = paramsSchema.safeParse(params);
+  const validation = initExampleParamsSchema.safeParse(params);
 
   if (!validation.success) {
     throw new ServiceError('VALIDATION_ERROR', 'Invalid ID', 400, validation.error.errors);
@@ -148,13 +152,13 @@ export async function initExampleUpdate(
   params: unknown,
   body: unknown
 ): Promise<InitExampleEntity> {
-  const paramsValidation = paramsSchema.safeParse(params);
+  const paramsValidation = initExampleParamsSchema.safeParse(params);
 
   if (!paramsValidation.success) {
     throw new ServiceError('VALIDATION_ERROR', 'Invalid ID', 400, paramsValidation.error.errors);
   }
 
-  const bodyValidation = updateSchema.safeParse(body);
+  const bodyValidation = initExampleUpdateSchema.safeParse(body);
 
   if (!bodyValidation.success) {
     throw new ServiceError(
@@ -202,7 +206,7 @@ export async function initExampleUpdate(
  * // Returns: { message: 'Deleted successfully' }
  */
 export async function initExampleDelete(params: unknown): Promise<{ message: string }> {
-  const validation = paramsSchema.safeParse(params);
+  const validation = initExampleParamsSchema.safeParse(params);
 
   if (!validation.success) {
     throw new ServiceError('VALIDATION_ERROR', 'Invalid ID', 400, validation.error.errors);

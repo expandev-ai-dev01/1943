@@ -1,2 +1,1 @@
-// Domain modules export
-export {};
+export * as car from './car/_module';
